@@ -22,8 +22,8 @@ export default async function Home() {
       <div className="max-w-[1000px] w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {products.map((product, productIndex) => {
           return (
-          <ProductCard key={productIndex} product={product} />
-        )
+            <ProductCard key={ productIndex } product={ product } />
+          )
         })}
       </div>
     </main>
