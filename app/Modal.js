@@ -25,19 +25,28 @@ export default function Modal() {
           <i onClick={closeModal} className="fa-solid cursor-pointer hover:opacity-60 fa-xmark"></i>
           <div className='absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] bg-slate-300 w-2/3'></div>   {/* this added the line under the Cart and close icon */}
         </div>
-        <div>
+        <div className='p-4 overflow-scroll flex-1 flex flex-col gap-4'>
           {cartItems.length === 0 ? (
             <p>There is nothing in your cart :'(</p>
           ) : (
             <>
                 {cartItems.map((cartItem, itemIndex) => {
                   return (
-                    <div key={itemIndex}>{cartItem.name}</div>
+                    <div key={itemIndex} className='flex border-l border-solid border-slate-700 px-2 flex-col gap-2'>
+                      <div className='flex items-center justify-between'>
+                        <h2>
+                          {cartItem.name}
+                        </h2>
+                        <p>€{cartItem.cost / 100}</p>
+                      </div>
+                      <p className='text-slate-600 text-sm'>Quantity: 1</p>
+                    </div>
                   )
                 })}
             </>
           )}
         </div>
+        <div className='border border-solid border-slate-700 text-xl m-4 p-6 uppercase grid place-items-center hover:opacity-60 cursor-pointer'>Checkout</div>
       </div>
     </div>,
     document.getElementById('portal')
