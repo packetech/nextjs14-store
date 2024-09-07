@@ -1,10 +1,17 @@
+import { NextResponse } from "next/server";
 import Stripe from "stripe"
 
-export async function POST(request, res) {
-    const body = JSON.parse(request.body)
+export async function POST(request) {
+
+    //if (request.method !== 'POST') { return res.sendStatus(405) }
+    //const body = JSON.parse(request.body)
+    const body = await request.json()
+
     if (body.lineItems.length === 0) {
         
-        return res.sendStatus(405)
+        return new Response('Error', {
+            status: 405,
+        });
     }
 
     try {
@@ -18,11 +25,12 @@ export async function POST(request, res) {
             line_items: body.lineItems,
             mode: 'payment'
         })
-        return res.status(201).json({ session })
-
+        return NextResponse.json({ session })
     } catch (err) {
         console.log('BROKED')
         console.log(err)
-        res.sendStatus(500)
+        return new Response('Error', {
+            status: 405,
+        });
     }
 }

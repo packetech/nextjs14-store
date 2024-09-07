@@ -2,10 +2,32 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import useCart from './(store)/store'
+import { useRouter } from 'next/navigation'
 
 export default function Modal() {
   const closeModal = useCart(state => state.setOpenModal)
   const cartItems = useCart(state => state.cart)
+  console.log(cartItems)
+  const router = useRouter()
+
+  async function checkout() {
+    const lineItems = cartItems.map(cartItem => {
+      console.log('CART ITEM:', cartItem)
+      return {
+        price: cartItem.price_id,
+        quantity: 1
+      }
+    })
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ lineItems })
+    })
+    const data = await res.json()
+    router.push(data.session.url)
+  }
 
 
   // this code block was used to wait until the DOM is ready, then ReactDOM.createPortal was called, smoljames didn't have this in nextjs 13. I did this because of the "Target container is not a DOM element Error" that I was getting, see more comments at the end of this file
@@ -46,7 +68,7 @@ export default function Modal() {
             </>
           )}
         </div>
-        <div className='border border-solid border-slate-700 text-xl m-4 p-6 uppercase grid place-items-center hover:opacity-60 cursor-pointer'>Checkout</div>
+        <div onClick={ checkout } className='border border-solid border-slate-700 text-xl m-4 p-6 uppercase grid place-items-center hover:opacity-60 cursor-pointer'>Checkout</div>
       </div>
     </div>,
     document.getElementById('portal')

@@ -6,7 +6,7 @@ import useCart from "../(store)/store"
 
 export default function ProductPage(props) {
     const { searchParams } = props
-    const { price_id } = props
+    const { price_id } = searchParams
     const product = useCart(state => state.product)
     const addItemToCart = useCart(state => state.addItemToCart)
     const { cost, productInfo, name, description } = product
@@ -18,9 +18,10 @@ export default function ProductPage(props) {
     }
 
     function handleAddToCart() {
+        console.log('PRICE ID: ', price_id)
         const newItem = {
             quantity: 1,
-            price_id: price_id,
+            price_id,
             name,
             cost
         }
