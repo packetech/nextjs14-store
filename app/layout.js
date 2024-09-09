@@ -22,10 +22,13 @@ export default function RootLayout({ children }) {
         <div className="flex-1">
           {children}
         </div>
-        <footer className="flex items-center flex-wrap justify-center border-t border-solid border-slate-300 p-4 md:p-8">
+        <footer className="flex flex-col items-center flex-wrap justify-center border-t border-solid border-slate-300 p-4 md:p-8">
           <Link href={'https://www.instagram.com/packetech/'} target="_blank">
           <i className="fa-brands fa-instagram text-slate-700 hover:text-slate-500 cursor-pointer text-2xl sm:text-3xl md:text-4xl"></i>
           </Link>
+          <div className="text-xs">
+            <p> #ndiBuilt Modern Full-Stack E-commerce App with NextJS 14, TailwindCSS + Stripe + Zustand</p>
+          </div>
         </footer>
         <div id="portal"></div>
         </body>
