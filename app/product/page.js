@@ -11,14 +11,14 @@ export default function ProductPage(props) {
     const addItemToCart = useCart(state => state.addItemToCart)
     const { cost, productInfo, name, description } = product
 
-    console.log(productInfo)
+    //console.log(productInfo)
 
     if (!product?.name) {
         window.location.href = '/'
     }
 
     function handleAddToCart() {
-        console.log('PRICE ID: ', price_id)
+        //console.log('PRICE ID: ', price_id)
         const newItem = {
             quantity: 1,
             price_id,

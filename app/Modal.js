@@ -7,12 +7,12 @@ import { useRouter } from 'next/navigation'
 export default function Modal() {
   const closeModal = useCart(state => state.setOpenModal)
   const cartItems = useCart(state => state.cart)
-  console.log(cartItems)
+  //console.log(cartItems)
   const router = useRouter()
 
   async function checkout() {
     const lineItems = cartItems.map(cartItem => {
-      console.log('CART ITEM:', cartItem)
+      //console.log('CART ITEM:', cartItem)
       return {
         price: cartItem.price_id,
         quantity: 1
@@ -30,7 +30,7 @@ export default function Modal() {
   }
 
 
-  // this code block was used to wait until the DOM is ready, then ReactDOM.createPortal was called, smoljames didn't have this in nextjs 13. I did this because of the "Target container is not a DOM element Error" that I was getting, see more comments at the end of this file
+  // this code block was used to wait until the DOM is ready, then ReactDOM.createPortal was called, he didn't have this in nextjs 13 app. I did this because of the "Target container is not a DOM element Error" that I was getting, see more comments at the end of this file
   const [domReady, setDomReady] = React.useState(false)
   React.useEffect(() => {
     setDomReady(true)
@@ -49,7 +49,7 @@ export default function Modal() {
         </div>
         <div className='p-4 overflow-scroll flex-1 flex flex-col gap-4'>
           {cartItems.length === 0 ? (
-            <p>There is nothing in your cart :'(</p>
+            <p>You have nothing in your cart :'(</p>
           ) : (
             <>
                 {cartItems.map((cartItem, itemIndex) => {
@@ -76,7 +76,7 @@ export default function Modal() {
   : null
 }
 
-/* 
+/*
 
 smolejames code generate the "Target container is not a DOM element Error"
 
